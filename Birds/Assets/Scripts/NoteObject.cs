@@ -8,6 +8,11 @@ public class NoteObject : MonoBehaviour
 
     [SerializeField] private ButtonController button;
     
+    [Header("Thresholds")]
+    [SerializeField] private float normalHitThreshold;
+    [SerializeField] private float goodHitThreshold;
+    [SerializeField] private float perfectHitThreshold;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -19,7 +24,14 @@ public class NoteObject : MonoBehaviour
     {
         if (Input.GetKeyDown(button.keyToPress))
         {
-            if (canBePressed) gameObject.SetActive(false);
+            if (canBePressed)
+            {
+                gameObject.SetActive(false);
+
+                if (Mathf.Abs(transform.position.x - button.transform.position.x) > normalHitThreshold) GameManager.Instance.NormalHit();
+                else if (Mathf.Abs(transform.position.x - button.transform.position.x) > goodHitThreshold) GameManager.Instance.GoodHit();
+                else if (Mathf.Abs(transform.position.x - button.transform.position.x) > perfectHitThreshold) GameManager.Instance.PerfectHit();
+            }
         }
     }
 
@@ -33,9 +45,10 @@ public class NoteObject : MonoBehaviour
     
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Activator"))
+        if (collision.CompareTag("Activator") && gameObject.activeSelf)
         {
             canBePressed = false;
+            GameManager.Instance.NoteMissed();
         }
     }
 }

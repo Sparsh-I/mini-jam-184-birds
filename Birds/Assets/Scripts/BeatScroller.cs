@@ -5,7 +5,7 @@ using UnityEngine;
 public class BeatScroller : MonoBehaviour
 {
     [SerializeField] private float beatTempo;
-    [SerializeField] private bool hasStarted;
+    public bool hasStarted;
     
     // Start is called before the first frame update
     void Start()
