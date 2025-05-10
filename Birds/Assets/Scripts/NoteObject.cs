@@ -34,17 +34,17 @@ public class NoteObject : MonoBehaviour
                 if (Mathf.Abs(transform.position.x - button.transform.position.x) > normalHitThreshold)
                 {
                     GameManager.Instance.NormalHit();
-                    Instantiate(hitEffect, transform.position + effectRelativePosition, Quaternion.identity);
+                    Instantiate(hitEffect, transform.position + effectRelativePosition, hitEffect.transform.rotation);
                 }
                 else if (Mathf.Abs(transform.position.x - button.transform.position.x) > goodHitThreshold)
                 {
                     GameManager.Instance.GoodHit();
-                    Instantiate(goodHitEffect, transform.position + effectRelativePosition, Quaternion.identity);
+                    Instantiate(goodHitEffect, transform.position + effectRelativePosition, goodHitEffect.transform.rotation);
                 }
                 else if (Mathf.Abs(transform.position.x - button.transform.position.x) > perfectHitThreshold)
                 {
                     GameManager.Instance.PerfectHit();
-                    Instantiate(perfectHitEffect, transform.position + effectRelativePosition, Quaternion.identity);
+                    Instantiate(perfectHitEffect, transform.position + effectRelativePosition, perfectHitEffect.transform.rotation);
                 }
                 
                 gameObject.SetActive(false);
@@ -68,6 +68,8 @@ public class NoteObject : MonoBehaviour
             canBePressed = false;
             GameManager.Instance.NoteMissed();
             Instantiate(missedHitEffect, transform.position + effectRelativePosition, Quaternion.identity);
+            
+            gameObject.SetActive(false);
             Destroy(gameObject);
         }
     }
