@@ -99,10 +99,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canBePressed: 0
-  button: {fileID: 0}
+  positionAddOn: {x: -1, y: 0, z: 0}
   normalHitThreshold: 0.3
   goodHitThreshold: 0.15
   perfectHitThreshold: 0.05
+  button: {fileID: 0}
+  hitEffect: {fileID: 117392614700422023, guid: 2e6d18ba6513e7747a5615dc499466e2, type: 3}
+  goodHitEffect: {fileID: 3975985412336583916, guid: 76461ff49c5d7da4c8ed34ca829abf73, type: 3}
+  perfectHitEffect: {fileID: 4195268353460451120, guid: dcc9561e4152dbb4a810a7cfe9499cf9, type: 3}
+  missedHitEffect: {fileID: 7782164464429830794, guid: d304bb453094b4c4f8a41b43a5a98823, type: 3}
 --- !u!58 &3614904452260337145
 CircleCollider2D:
   m_ObjectHideFlags: 0

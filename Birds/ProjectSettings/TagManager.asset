@@ -48,3 +48,6 @@ TagManager:
   - name: Feathers
     uniqueID: 874052283
     locked: 0
+  - name: Effects
+    uniqueID: 39270371
+    locked: 0
