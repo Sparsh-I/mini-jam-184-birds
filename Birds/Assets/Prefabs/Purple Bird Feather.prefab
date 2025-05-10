@@ -98,11 +98,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 26ea6e7ed620e6b4bb186dd1b2047585, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canBePressed: 1
-  positionAddOn: {x: -1, y: 0, z: 0}
+  canBePressed: 0
+  effectRelativePosition: {x: -1, y: 0, z: 0}
   normalHitThreshold: 0.3
   goodHitThreshold: 0.15
-  perfectHitThreshold: 0.05
+  perfectHitThreshold: 0.7
   button: {fileID: 0}
   hitEffect: {fileID: 117392614700422023, guid: 2e6d18ba6513e7747a5615dc499466e2, type: 3}
   goodHitEffect: {fileID: 3975985412336583916, guid: 76461ff49c5d7da4c8ed34ca829abf73, type: 3}

@@ -42,6 +42,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 3690923489
+    locked: 0
   - name: Birds
     uniqueID: 3642294493
     locked: 0
@@ -50,4 +53,7 @@ TagManager:
     locked: 0
   - name: Effects
     uniqueID: 39270371
+    locked: 0
+  - name: HUD
+    uniqueID: 36145097
     locked: 0

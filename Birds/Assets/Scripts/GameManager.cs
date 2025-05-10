@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
     
     private void Start()
     {
+        startPlaying = false;
         Instance = this;
         scoreText.text = "Score: 0";
         currentMultiplier = 1;
@@ -45,7 +46,7 @@ public class GameManager : MonoBehaviour
     {
         if (!startPlaying)
         {
-            if (Input.anyKeyDown)
+            if (Input.GetKeyDown(KeyCode.Space))
             {
                 startPlaying = true;
                 beatScroller.hasStarted = true;

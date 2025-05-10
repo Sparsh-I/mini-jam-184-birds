@@ -37,6 +37,8 @@ public class NoteSpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!musicSource.isPlaying) return;
+        
         time = musicSource.time;
         UpdateBrownFeather();
         UpdatePurpleFeather();
