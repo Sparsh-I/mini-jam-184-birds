@@ -16,7 +16,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int scorePerNote;
     [SerializeField] private int scorePerGoodNote;
     [SerializeField] private int scorePerPerfectNote;
-    [SerializeField] private TextMeshProUGUI scoreText;
     
     [Header("Multiplier Settings")]
     [Tooltip("Multiplier that is currently set")]
@@ -28,6 +27,10 @@ public class GameManager : MonoBehaviour
     [Tooltip("Thresholds to get to next multiplier level")]
     [SerializeField] private int[] multiplierThreshold;
     [SerializeField] private TextMeshProUGUI multiplierText;
+    
+    [Header("Results Settings")]
+    [SerializeField] private TextMeshProUGUI scoreText;
+    public int normalHitCount, goodHitCount, perfectHitCount, missedHitCount;
     
     [Header("References")]
     [SerializeField] private BeatScroller beatScroller;
@@ -53,6 +56,9 @@ public class GameManager : MonoBehaviour
                 musicSource.Play();
             }
         }
+        
+        scoreText.text = "Score: " + currentScore;
+        multiplierText.text = "Multiplier: x" + currentMultiplier;
     }
 
     public void NoteHit()
@@ -73,24 +79,28 @@ public class GameManager : MonoBehaviour
 
     public void NoteMissed()
     {
+        missedHitCount++;
         currentMultiplier = 1;
         multiplierTracker = 0;
     }
 
     public void NormalHit()
     {
+        normalHitCount++;
         currentScore += scorePerNote * currentMultiplier;
         NoteHit();
     }
     
     public void GoodHit()
     {
+        goodHitCount++;
         currentScore += scorePerGoodNote * currentMultiplier;
         NoteHit();
     }
     
     public void PerfectHit()
     {
+        perfectHitCount++;
         currentScore += scorePerPerfectNote * currentMultiplier;
         NoteHit();
     }

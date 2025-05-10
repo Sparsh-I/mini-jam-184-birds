@@ -1,50 +1,44 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Security.Cryptography;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class NoteObject : MonoBehaviour
 {
     [SerializeField] private bool canBePressed;
     [SerializeField] private Vector3 effectRelativePosition;
     
-    [Header("Thresholds")]
-    [SerializeField] private float normalHitThreshold;
-    [SerializeField] private float goodHitThreshold;
-    [SerializeField] private float perfectHitThreshold;
+    [Header("Thresholds")] [SerializeField] 
+    private float normalHitThreshold, goodHitThreshold, perfectHitThreshold;
 
     [Header("References")] 
     [SerializeField] private ButtonController button;
     [SerializeField] private GameObject hitEffect, goodHitEffect, perfectHitEffect, missedHitEffect;
     
-    // Start is called before the first frame update
     void Start()
     {
         canBePressed = false;
     }
 
-    // Update is called once per frame
     void Update()
     {
+        float hitOffset = Mathf.Abs(transform.position.x - button.transform.position.x);
+        
         if (Input.GetKeyDown(button.keyToPress))
         {
             if (canBePressed)
             {
-                if (Mathf.Abs(transform.position.x - button.transform.position.x) > normalHitThreshold)
+                if (hitOffset <= perfectHitThreshold)
                 {
-                    GameManager.Instance.NormalHit();
-                    Instantiate(hitEffect, transform.position + effectRelativePosition, hitEffect.transform.rotation);
-                }
-                else if (Mathf.Abs(transform.position.x - button.transform.position.x) > goodHitThreshold)
-                {
-                    GameManager.Instance.GoodHit();
-                    Instantiate(goodHitEffect, transform.position + effectRelativePosition, goodHitEffect.transform.rotation);
-                }
-                else if (Mathf.Abs(transform.position.x - button.transform.position.x) > perfectHitThreshold)
-                {
-                    GameManager.Instance.PerfectHit();
                     Instantiate(perfectHitEffect, transform.position + effectRelativePosition, perfectHitEffect.transform.rotation);
+                    GameManager.Instance.PerfectHit();
+                }
+                else if (hitOffset <= goodHitThreshold)
+                {
+                    Instantiate(goodHitEffect, transform.position + effectRelativePosition, goodHitEffect.transform.rotation);
+                    GameManager.Instance.GoodHit();
+                }
+                else if (hitOffset <= normalHitThreshold)
+                {
+                    Instantiate(hitEffect, transform.position + effectRelativePosition, hitEffect.transform.rotation);
+                    GameManager.Instance.NormalHit();
                 }
                 
                 gameObject.SetActive(false);
@@ -66,8 +60,8 @@ public class NoteObject : MonoBehaviour
         if (collision.CompareTag("Activator") && gameObject.activeSelf)
         {
             canBePressed = false;
+            Instantiate(missedHitEffect, transform.position + effectRelativePosition, missedHitEffect.transform.rotation);
             GameManager.Instance.NoteMissed();
-            Instantiate(missedHitEffect, transform.position + effectRelativePosition, Quaternion.identity);
             
             gameObject.SetActive(false);
             Destroy(gameObject);

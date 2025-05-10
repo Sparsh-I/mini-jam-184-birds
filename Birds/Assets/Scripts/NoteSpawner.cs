@@ -22,19 +22,11 @@ public class NoteSpawner : MonoBehaviour
     [Header("Timing")]
     [SerializeField] private List<float> brownFeatherTimings;
     [SerializeField] private List<float> purpleFeatherTimings;
-    [SerializeField] private float noteTravelTime = 1.0f;
     [SerializeField] private float time;
     
     private int _nextBrownFeatherIndex;
     private int _nextPurpleFeatherIndex;
     
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
     void Update()
     {
         if (!musicSource.isPlaying) return;
@@ -50,7 +42,7 @@ public class NoteSpawner : MonoBehaviour
         
         var currentTime = musicSource.time;
 
-        if (currentTime >= brownFeatherTimings[_nextBrownFeatherIndex] - noteTravelTime)
+        if (currentTime >= brownFeatherTimings[_nextBrownFeatherIndex])
         {
             SpawnBrownFeather();
             _nextBrownFeatherIndex++;
@@ -63,7 +55,7 @@ public class NoteSpawner : MonoBehaviour
         
         var currentTime = musicSource.time;
 
-        if (currentTime >= purpleFeatherTimings[_nextPurpleFeatherIndex] - noteTravelTime)
+        if (currentTime >= purpleFeatherTimings[_nextPurpleFeatherIndex])
         {
             SpawnPurpleFeather();
             _nextPurpleFeatherIndex++;

@@ -100,9 +100,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canBePressed: 0
   effectRelativePosition: {x: -1, y: 0, z: 0}
-  normalHitThreshold: 0.3
-  goodHitThreshold: 0.15
-  perfectHitThreshold: 0.7
+  normalHitThreshold: 0.7
+  goodHitThreshold: 0.3
+  perfectHitThreshold: 0.1
   button: {fileID: 0}
   hitEffect: {fileID: 117392614700422023, guid: 2e6d18ba6513e7747a5615dc499466e2, type: 3}
   goodHitEffect: {fileID: 3975985412336583916, guid: 76461ff49c5d7da4c8ed34ca829abf73, type: 3}
