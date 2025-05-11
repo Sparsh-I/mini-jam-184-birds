@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class NoteObject : MonoBehaviour
@@ -12,54 +13,10 @@ public class NoteObject : MonoBehaviour
     [SerializeField] private ButtonController button;
     [SerializeField] private GameObject hitEffect, goodHitEffect, perfectHitEffect, missedHitEffect;
     
-    void Start()
-    {
-        canBePressed = false;
-    }
-
-    void Update()
-    {
-        float hitOffset = Mathf.Abs(transform.position.x - button.transform.position.x);
-        
-        if (Input.GetKeyDown(button.keyToPress))
-        {
-            if (canBePressed)
-            {
-                if (hitOffset <= perfectHitThreshold)
-                {
-                    Instantiate(perfectHitEffect, transform.position + effectRelativePosition, perfectHitEffect.transform.rotation);
-                    GameManager.Instance.PerfectHit();
-                }
-                else if (hitOffset <= goodHitThreshold)
-                {
-                    Instantiate(goodHitEffect, transform.position + effectRelativePosition, goodHitEffect.transform.rotation);
-                    GameManager.Instance.GoodHit();
-                }
-                else if (hitOffset <= normalHitThreshold)
-                {
-                    Instantiate(hitEffect, transform.position + effectRelativePosition, hitEffect.transform.rotation);
-                    GameManager.Instance.MehHit();
-                }
-                
-                gameObject.SetActive(false);
-                Destroy(gameObject);
-            }
-        }
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Activator"))
-        {
-            canBePressed = true;
-        }
-    }
-    
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Activator") && gameObject.activeSelf)
         {
-            canBePressed = false;
             Instantiate(missedHitEffect, transform.position + effectRelativePosition, missedHitEffect.transform.rotation);
             GameManager.Instance.NoteMissed();
             
@@ -71,5 +28,29 @@ public class NoteObject : MonoBehaviour
     public void SetButton(ButtonController bird)
     {
         button = bird;
+    }
+
+    public void Hit()
+    {
+        float hitOffset = Mathf.Abs(transform.position.x - button.transform.position.x);
+        
+        if (hitOffset <= perfectHitThreshold)
+        {
+            Instantiate(perfectHitEffect, transform.position + effectRelativePosition, perfectHitEffect.transform.rotation);
+            GameManager.Instance.PerfectHit();
+        }
+        else if (hitOffset <= goodHitThreshold)
+        {
+            Instantiate(goodHitEffect, transform.position + effectRelativePosition, goodHitEffect.transform.rotation);
+            GameManager.Instance.GoodHit();
+        }
+        else if (hitOffset <= normalHitThreshold)
+        {
+            Instantiate(hitEffect, transform.position + effectRelativePosition, hitEffect.transform.rotation);
+            GameManager.Instance.MehHit();
+        }
+                
+        gameObject.SetActive(false);
+        Destroy(gameObject);
     }
 }

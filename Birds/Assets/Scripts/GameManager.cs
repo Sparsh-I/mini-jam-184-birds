@@ -61,7 +61,7 @@ public class GameManager : MonoBehaviour
                 startPlaying = true;
                 beatScroller.hasStarted = true;
                 // StartCoroutine(StartAfterDelay(_timeDelay));
-                musicSource.Play();
+                musicSource.Play(); // remove if uncommenting the above lines
             }
         }
         

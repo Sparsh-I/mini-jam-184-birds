@@ -2006,25 +2006,30 @@ MonoBehaviour:
   - buttonController: {fileID: 2680819365050379825}
     featherPrefab: {fileID: 5706419807456300814, guid: d36218851b7749d488cf992156b01852, type: 3}
     beatTimings:
-    - 19
+    - 18
+    - 19.5
     - 21
-    - 22
-    - 22.5
+    - 21.5
     - 24
     - 25
     - 25.3
     - 25.6
+    - 26
+    - 30.3
+    - 31.6
+    - 32
   - buttonController: {fileID: 5748385832949504128}
     featherPrefab: {fileID: 5559313273154244196, guid: a7c315465239af04bbad967b17db87db, type: 3}
     beatTimings:
-    - 20.5
-    - 21
-    - 23
+    - 19
+    - 20
+    - 22.5
     - 27
     - 28
     - 28.5
     - 29
     - 30
+    - 33
   - buttonController: {fileID: 1513002138}
     featherPrefab: {fileID: 5024947244640855663, guid: ee48ea3e05694264b83a5d5bfab50301, type: 3}
     beatTimings:
@@ -2036,7 +2041,6 @@ MonoBehaviour:
     - 12
     - 14
     - 16
-    - 18
   currentBeat: 0
 --- !u!4 &1653652535
 Transform:
@@ -2274,7 +2278,7 @@ GameObject:
   - component: {fileID: 1861141375}
   - component: {fileID: 1861141374}
   m_Layer: 5
-  m_Name: Results Page
+  m_Name: Results Window
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
