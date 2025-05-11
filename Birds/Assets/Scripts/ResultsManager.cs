@@ -11,38 +11,15 @@ public class ResultsManager : MonoBehaviour
     [SerializeField] private GameObject resultsPane;
     [SerializeField] private TextMeshProUGUI normalHitCountText, goodHitCountText, perfectHitCountText, missedHitCountText;
 
-    [Header("Timing Check")] [SerializeField]
-    private float timer;
-
     [Header("References")] 
     [SerializeField] private GameManager gameManager;
-    [SerializeField] private AudioSource musicSource;
-    [SerializeField] private BeatScroller beatScroller;
-    
-    private Transform _notes;
     
     private void Start()
     {
         resultsPane.gameObject.SetActive(false);
     }
-
-    private void Update()
-    {
-        if (musicSource.time >= timer)
-        {
-            EndLevel();
-            ShowResults();
-        }
-    }
-
-    private void EndLevel()
-    {
-        _notes = beatScroller.transform;
-        musicSource.Stop();
-        foreach (Transform note in _notes) Destroy(note.gameObject);
-    }
     
-    private void ShowResults()
+    public void ShowResults()
     {
         resultsPane.gameObject.SetActive(true);
         

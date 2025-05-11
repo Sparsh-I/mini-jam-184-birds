@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -9,85 +10,64 @@ public class NoteSpawner : MonoBehaviour
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private Transform spawnPoint;
     
-    [Header("Scroller Mechanics")]
-    [SerializeField] private BeatScroller beatScroller;
-    [SerializeField] private Vector3 brownFeatherOffset;
-    [SerializeField] private Vector3 purpleFeatherOffset;
+    [Header("Scroller Mechanics")] [SerializeField] 
+    private BeatScroller beatScroller;
      
-    [Header("Note Mechanics")]
-    [SerializeField] private GameObject brownFeatherNote;
-    [SerializeField] private GameObject purpleFeatherNote;
-    [SerializeField] private ButtonController brownBirdController;
-    [SerializeField] private ButtonController purpleBirdController;
-
-    [Header("Timing")]
-    [SerializeField] private List<float> brownFeatherBeats;
-    [SerializeField] private List<float> purpleFeatherBeats;
+    [FormerlySerializedAs("birdNotes")] [Header("Bird Note Data")] [SerializeField]
+    private List<BirdNoteData> birdNoteData = new List<BirdNoteData>();
     
-    private readonly List<float> _brownFeatherTimings = new List<float>();
-    private readonly List<float> _purpleFeatherTimings = new List<float>();
+    private readonly List<List<float>> _birdNoteTimings = new List<List<float>>();
+    private int[] _nextNoteIndices;
     
     [SerializeField] private int currentBeat;
     
-    private int _nextBrownFeatherIndex;
-    private int _nextPurpleFeatherIndex;
-
     private void Start()
     {
         var secondsPerBeat = 60f / beatScroller.BeatTempo;
+        _nextNoteIndices = new int[birdNoteData.Count];
+        
+        foreach (var bird in birdNoteData)
+        {
+            List<float> timings = new List<float>();
+            foreach (var beat in bird.beatTimings)
+                timings.Add(beat * secondsPerBeat);
 
-        foreach (var beat in brownFeatherBeats) _brownFeatherTimings.Add(beat * secondsPerBeat);
-        foreach (var beat in purpleFeatherBeats) _purpleFeatherTimings.Add(beat * secondsPerBeat);
+            _birdNoteTimings.Add(timings);
+        }
     }
     
     private void Update()
     {
         if (!beatScroller.hasStarted) return;
         
+        var currentTime = musicSource.time;
+
+        for (int i = 0; i < birdNoteData.Count; i++)
+        {
+            var noteTimings = _birdNoteTimings[i];
+            int nextIndex = _nextNoteIndices[i];
+
+            if (nextIndex >= noteTimings.Count) continue;
+            
+            if (currentTime >= noteTimings[nextIndex])
+            {
+                SpawnFeather(i);
+                _nextNoteIndices[i]++;
+            }
+        }
+        
         currentBeat = (int) (musicSource.time * beatScroller.BeatTempo / 60f);
-        UpdateBrownFeather();
-        UpdatePurpleFeather();
     }
 
-    private void UpdateBrownFeather()
+    private void SpawnFeather(int birdIndex)
     {
-        if (_nextBrownFeatherIndex >= _brownFeatherTimings.Count) return;
+        BirdNoteData bird = birdNoteData[birdIndex];
+        GameObject feather = bird.featherPrefab;
+        ButtonController birdController = bird.buttonController;
+        Vector3 spawnOffset = new Vector3(0f, birdController.transform.position.y, 0f);
         
-        var currentTime = musicSource.time;
-
-        if (currentTime >= _brownFeatherTimings[_nextBrownFeatherIndex])
-        {
-            SpawnBrownFeather();
-            _nextBrownFeatherIndex++;
-        }
-    }
-    
-    private void UpdatePurpleFeather()
-    {
-        if (_nextPurpleFeatherIndex >= _purpleFeatherTimings.Count) return;
-        
-        var currentTime = musicSource.time;
-
-        if (currentTime >= _purpleFeatherTimings[_nextPurpleFeatherIndex])
-        {
-            SpawnPurpleFeather();
-            _nextPurpleFeatherIndex++;
-        }
-    }
-
-    private void SpawnBrownFeather()
-    {
-        GameObject note = Instantiate(brownFeatherNote, spawnPoint.position + brownFeatherOffset, Quaternion.identity, beatScroller.transform);
+        GameObject note = Instantiate(feather, spawnPoint.position + spawnOffset, Quaternion.identity, beatScroller.transform);
         NoteObject noteScript = note.GetComponent<NoteObject>();
-        noteScript.SetButton(brownBirdController);
+        noteScript.SetButton(birdController);
     }
-    
-    private void SpawnPurpleFeather()
-    {
-        GameObject note = Instantiate(purpleFeatherNote, spawnPoint.position + purpleFeatherOffset, Quaternion.identity, beatScroller.transform);
-        NoteObject noteScript = note.GetComponent<NoteObject>();
-        noteScript.SetButton(purpleBirdController);
-    }
-
-
 }

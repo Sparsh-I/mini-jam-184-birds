@@ -11,7 +11,7 @@ public class GameManager : MonoBehaviour
     [Tooltip("The music for this level")]
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private bool startPlaying;
-    [SerializeField] private int beatDelay;
+    // [SerializeField] private int beatDelay;
     private float _timeDelay;
     
     [Header("Scoring Settings")]
@@ -49,7 +49,7 @@ public class GameManager : MonoBehaviour
         currentMultiplier = 1;
         multiplierText.text = "Multiplier: x1";
         
-        _timeDelay = beatDelay * (60f / beatScroller.BeatTempo);
+        // _timeDelay = beatDelay * (60f / beatScroller.BeatTempo);
     }
 
     private void Update()
@@ -60,7 +60,8 @@ public class GameManager : MonoBehaviour
             {
                 startPlaying = true;
                 beatScroller.hasStarted = true;
-                StartCoroutine(StartAfterDelay(_timeDelay));
+                // StartCoroutine(StartAfterDelay(_timeDelay));
+                musicSource.Play();
             }
         }
         
