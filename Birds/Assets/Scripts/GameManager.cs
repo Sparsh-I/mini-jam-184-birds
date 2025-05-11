@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class GameManager : MonoBehaviour
     [Tooltip("The music for this level")]
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private bool startPlaying;
+    [SerializeField] private int beatDelay;
+    private float _timeDelay;
     
     [Header("Scoring Settings")]
     [SerializeField] private int currentScore;
@@ -30,8 +33,8 @@ public class GameManager : MonoBehaviour
     
     [Header("Results Settings")]
     [SerializeField] private TextMeshProUGUI scoreText;
-    public int normalHitCount, goodHitCount, perfectHitCount, missedHitCount;
-    
+    public int mehHitCount, goodHitCount, perfectHitCount, missedHitCount;
+
     [Header("References")]
     [SerializeField] private BeatScroller beatScroller;
     public static GameManager Instance;
@@ -40,9 +43,13 @@ public class GameManager : MonoBehaviour
     {
         startPlaying = false;
         Instance = this;
+        
         scoreText.text = "Score: 0";
+        
         currentMultiplier = 1;
         multiplierText.text = "Multiplier: x1";
+        
+        _timeDelay = beatDelay * (60f / beatScroller.BeatTempo);
     }
 
     private void Update()
@@ -53,12 +60,18 @@ public class GameManager : MonoBehaviour
             {
                 startPlaying = true;
                 beatScroller.hasStarted = true;
-                musicSource.Play();
+                StartCoroutine(StartAfterDelay(_timeDelay));
             }
         }
         
         scoreText.text = "Score: " + currentScore;
         multiplierText.text = "Multiplier: x" + currentMultiplier;
+    }
+
+    private IEnumerator StartAfterDelay(float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+        musicSource.Play();
     }
 
     public void NoteHit()
@@ -84,9 +97,9 @@ public class GameManager : MonoBehaviour
         multiplierTracker = 0;
     }
 
-    public void NormalHit()
+    public void MehHit()
     {
-        normalHitCount++;
+        mehHitCount++;
         currentScore += scorePerNote * currentMultiplier;
         NoteHit();
     }

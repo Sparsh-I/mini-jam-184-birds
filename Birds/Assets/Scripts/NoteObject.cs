@@ -38,7 +38,7 @@ public class NoteObject : MonoBehaviour
                 else if (hitOffset <= normalHitThreshold)
                 {
                     Instantiate(hitEffect, transform.position + effectRelativePosition, hitEffect.transform.rotation);
-                    GameManager.Instance.NormalHit();
+                    GameManager.Instance.MehHit();
                 }
                 
                 gameObject.SetActive(false);

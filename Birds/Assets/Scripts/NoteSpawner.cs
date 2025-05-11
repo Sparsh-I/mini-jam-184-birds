@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class NoteSpawner : MonoBehaviour
 {
@@ -20,29 +21,41 @@ public class NoteSpawner : MonoBehaviour
     [SerializeField] private ButtonController purpleBirdController;
 
     [Header("Timing")]
-    [SerializeField] private List<float> brownFeatherTimings;
-    [SerializeField] private List<float> purpleFeatherTimings;
-    [SerializeField] private float time;
+    [SerializeField] private List<float> brownFeatherBeats;
+    [SerializeField] private List<float> purpleFeatherBeats;
+    
+    private readonly List<float> _brownFeatherTimings = new List<float>();
+    private readonly List<float> _purpleFeatherTimings = new List<float>();
+    
+    [SerializeField] private int currentBeat;
     
     private int _nextBrownFeatherIndex;
     private int _nextPurpleFeatherIndex;
-    
-    void Update()
+
+    private void Start()
     {
-        if (!musicSource.isPlaying) return;
+        var secondsPerBeat = 60f / beatScroller.BeatTempo;
+
+        foreach (var beat in brownFeatherBeats) _brownFeatherTimings.Add(beat * secondsPerBeat);
+        foreach (var beat in purpleFeatherBeats) _purpleFeatherTimings.Add(beat * secondsPerBeat);
+    }
+    
+    private void Update()
+    {
+        if (!beatScroller.hasStarted) return;
         
-        time = musicSource.time;
+        currentBeat = (int) (musicSource.time * beatScroller.BeatTempo / 60f);
         UpdateBrownFeather();
         UpdatePurpleFeather();
     }
 
     private void UpdateBrownFeather()
     {
-        if (_nextBrownFeatherIndex >= brownFeatherTimings.Count) return;
+        if (_nextBrownFeatherIndex >= _brownFeatherTimings.Count) return;
         
         var currentTime = musicSource.time;
 
-        if (currentTime >= brownFeatherTimings[_nextBrownFeatherIndex])
+        if (currentTime >= _brownFeatherTimings[_nextBrownFeatherIndex])
         {
             SpawnBrownFeather();
             _nextBrownFeatherIndex++;
@@ -51,11 +64,11 @@ public class NoteSpawner : MonoBehaviour
     
     private void UpdatePurpleFeather()
     {
-        if (_nextPurpleFeatherIndex >= purpleFeatherTimings.Count) return;
+        if (_nextPurpleFeatherIndex >= _purpleFeatherTimings.Count) return;
         
         var currentTime = musicSource.time;
 
-        if (currentTime >= purpleFeatherTimings[_nextPurpleFeatherIndex])
+        if (currentTime >= _purpleFeatherTimings[_nextPurpleFeatherIndex])
         {
             SpawnPurpleFeather();
             _nextPurpleFeatherIndex++;
@@ -75,4 +88,6 @@ public class NoteSpawner : MonoBehaviour
         NoteObject noteScript = note.GetComponent<NoteObject>();
         noteScript.SetButton(purpleBirdController);
     }
+
+
 }
