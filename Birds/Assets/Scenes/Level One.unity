@@ -1113,7 +1113,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   beatTempo: 158
   hasStarted: 0
-  timer: 30
+  timer: 59
   fadeTimer: 5
   currentTimeInLevel: 0
   musicSource: {fileID: 632749902}
@@ -2018,6 +2018,18 @@ MonoBehaviour:
     - 30.3
     - 31.6
     - 32
+    - 34
+    - 35.5
+    - 37
+    - 37.5
+    - 40
+    - 41
+    - 41.3
+    - 41.6
+    - 42
+    - 46.3
+    - 47.6
+    - 48
   - buttonController: {fileID: 5748385832949504128}
     featherPrefab: {fileID: 5559313273154244196, guid: a7c315465239af04bbad967b17db87db, type: 3}
     beatTimings:
@@ -2030,6 +2042,15 @@ MonoBehaviour:
     - 29
     - 30
     - 33
+    - 35
+    - 36
+    - 38.5
+    - 43
+    - 44
+    - 44.5
+    - 45
+    - 46
+    - 49
   - buttonController: {fileID: 1513002138}
     featherPrefab: {fileID: 5024947244640855663, guid: ee48ea3e05694264b83a5d5bfab50301, type: 3}
     beatTimings:
