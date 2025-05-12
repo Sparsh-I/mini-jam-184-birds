@@ -1026,10 +1026,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -1113,8 +1113,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   beatTempo: 158
   hasStarted: 0
-  timer: 59
-  fadeTimer: 5
+  timer: 50
+  fadeTimer: 10
   currentTimeInLevel: 0
   musicSource: {fileID: 632749902}
   resultsManager: {fileID: 61353675}
@@ -2003,6 +2003,35 @@ MonoBehaviour:
     - 15
     - 16
     - 17
+    - 52
+    - 54
+    - 56
+    - 58
+    - 59
+    - 60
+    - 61
+    - 62
+    - 63
+    - 64
+    - 65
+    - 66
+    - 79
+    - 84
+    - 86
+    - 88
+    - 90
+    - 92
+    - 93
+    - 94
+    - 95
+    - 96
+    - 97
+    - 98
+    - 100
+    - 108
+    - 109
+    - 110
+    - 111
   - buttonController: {fileID: 2680819365050379825}
     featherPrefab: {fileID: 5706419807456300814, guid: d36218851b7749d488cf992156b01852, type: 3}
     beatTimings:
@@ -2030,6 +2059,12 @@ MonoBehaviour:
     - 46.3
     - 47.6
     - 48
+    - 71
+    - 80.5
+    - 108
+    - 109
+    - 110
+    - 111
   - buttonController: {fileID: 5748385832949504128}
     featherPrefab: {fileID: 5559313273154244196, guid: a7c315465239af04bbad967b17db87db, type: 3}
     beatTimings:
@@ -2051,6 +2086,14 @@ MonoBehaviour:
     - 45
     - 46
     - 49
+    - 69.5
+    - 72.5
+    - 77.5
+    - 82
+    - 108
+    - 109
+    - 110
+    - 111
   - buttonController: {fileID: 1513002138}
     featherPrefab: {fileID: 5024947244640855663, guid: ee48ea3e05694264b83a5d5bfab50301, type: 3}
     beatTimings:
@@ -2062,6 +2105,29 @@ MonoBehaviour:
     - 12
     - 14
     - 16
+    - 51
+    - 53
+    - 55
+    - 57
+    - 59
+    - 61
+    - 63
+    - 65
+    - 68
+    - 74
+    - 76
+    - 83
+    - 85
+    - 87
+    - 89
+    - 91
+    - 93
+    - 95
+    - 97
+    - 108
+    - 109
+    - 110
+    - 111
   currentBeat: 0
 --- !u!4 &1653652535
 Transform:

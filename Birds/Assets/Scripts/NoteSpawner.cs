@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class NoteSpawner : MonoBehaviour
 {
@@ -13,7 +11,7 @@ public class NoteSpawner : MonoBehaviour
     [Header("Scroller Mechanics")] [SerializeField] 
     private BeatScroller beatScroller;
      
-    [FormerlySerializedAs("birdNotes")] [Header("Bird Note Data")] [SerializeField]
+    [Header("Bird Note Data")] [SerializeField]
     private List<BirdNoteData> birdNoteData = new List<BirdNoteData>();
     
     private readonly List<List<float>> _birdNoteTimings = new List<List<float>>();
