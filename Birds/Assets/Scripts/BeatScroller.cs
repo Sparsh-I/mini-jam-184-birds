@@ -34,7 +34,7 @@ public class BeatScroller : MonoBehaviour
     {
         if (!hasStarted || _levelEnded) return;
         
-        transform.position -= new Vector3(_beatsPerSecond * Time.deltaTime, 0f, 0f);
+        transform.position -= new Vector3(0f, _beatsPerSecond * Time.deltaTime, 0f);
         currentTimeInLevel += Time.deltaTime;
 
         if (musicSource.time >= timer - fadeTimer)

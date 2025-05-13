@@ -7,6 +7,10 @@ public class ButtonController : MonoBehaviour
     private SpriteRenderer _spriteRenderer;
     [SerializeField] private Sprite defaultSprite;
     [SerializeField] private Sprite pressedSprite;
+    
+    [Header("Effect Settings")]
+    [SerializeField] private GameObject penaltyEffect;
+    [SerializeField] private Vector3 effectRelativePosition;
 
     public KeyCode keyToPress;
     private readonly List<NoteObject> _notesInRange = new();
@@ -29,7 +33,12 @@ public class ButtonController : MonoBehaviour
 
     private void HitFirstNoteInRange()
     {
-        if (_notesInRange.Count == 0) return;
+        if (_notesInRange.Count == 0)
+        {
+            Instantiate(penaltyEffect, transform.position + effectRelativePosition, penaltyEffect.transform.rotation);
+            GameManager.Instance.ApplyPenalty();
+            return;
+        }
 
         NoteObject note = _notesInRange[0];
         _notesInRange.RemoveAt(0);

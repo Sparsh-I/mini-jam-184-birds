@@ -62,7 +62,7 @@ public class NoteSpawner : MonoBehaviour
         BirdNoteData bird = birdNoteData[birdIndex];
         GameObject feather = bird.featherPrefab;
         ButtonController birdController = bird.buttonController;
-        Vector3 spawnOffset = new Vector3(0f, birdController.transform.position.y, 0f);
+        Vector3 spawnOffset = new Vector3(birdController.transform.position.x, 0f, 0f);
         
         GameObject note = Instantiate(feather, spawnPoint.position + spawnOffset, Quaternion.identity, beatScroller.transform);
         NoteObject noteScript = note.GetComponent<NoteObject>();

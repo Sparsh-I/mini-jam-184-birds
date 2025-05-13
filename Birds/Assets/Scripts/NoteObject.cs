@@ -32,7 +32,7 @@ public class NoteObject : MonoBehaviour
 
     public void Hit()
     {
-        float hitOffset = Mathf.Abs(transform.position.x - button.transform.position.x);
+        float hitOffset = Mathf.Abs(transform.position.y - button.transform.position.y);
         
         if (hitOffset <= perfectHitThreshold)
         {

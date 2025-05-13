@@ -99,7 +99,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   canBePressed: 0
-  effectRelativePosition: {x: -0.5, y: 0, z: 0}
+  effectRelativePosition: {x: 1, y: 0, z: 0}
   normalHitThreshold: 0.7
   goodHitThreshold: 0.3
   perfectHitThreshold: 0.1

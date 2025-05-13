@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 7206168985256292007}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6, y: 2, z: 0}
+  m_LocalPosition: {x: -3, y: 4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -102,6 +102,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSprite: {fileID: 146797869, guid: c196e6604ace9884ca08dd76120d9ee8, type: 3}
   pressedSprite: {fileID: -654709483, guid: c196e6604ace9884ca08dd76120d9ee8, type: 3}
+  penaltyEffect: {fileID: 1401895884935521653, guid: 8d1687894072e934899c55d62677d9b6, type: 3}
+  effectRelativePosition: {x: 0, y: -1, z: 0}
   keyToPress: 115
 --- !u!61 &3690746810524711171
 BoxCollider2D:
@@ -201,8 +203,8 @@ Transform:
   m_GameObject: {fileID: 9131425200749700166}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.4379, y: 0, z: 0}
-  m_LocalScale: {x: 15.123852, y: 0.7, z: 1}
+  m_LocalPosition: {x: 0, y: 4.5653, z: 0}
+  m_LocalScale: {x: 0.7, y: 9.254283, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 8990227386572205304}

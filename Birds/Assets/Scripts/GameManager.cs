@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int scorePerNote;
     [SerializeField] private int scorePerGoodNote;
     [SerializeField] private int scorePerPerfectNote;
+    [SerializeField] private int scoreForPenalty;
     
     [Header("Multiplier Settings")]
     [Tooltip("Multiplier that is currently set")]
@@ -115,5 +116,12 @@ public class GameManager : MonoBehaviour
         perfectHitCount++;
         currentScore += scorePerPerfectNote * currentMultiplier;
         NoteHit();
+    }
+
+    public void ApplyPenalty()
+    {
+        currentScore -= scoreForPenalty;
+        currentMultiplier = 1;
+        multiplierTracker = 0;
     }
 }
