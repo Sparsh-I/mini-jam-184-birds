@@ -1,16 +1,18 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    [Header("Music Settings")]
+    [Header("Audio Settings")]
     [Tooltip("The music for this level")]
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private bool startPlaying;
     // [SerializeField] private int beatDelay;
     private float _timeDelay;
+    [SerializeField] private AudioSource hitSfx;
+    [SerializeField] private AudioSource errorSfx;
     
     [Header("Scoring Settings")]
     [SerializeField] private int currentScore;
@@ -74,8 +76,9 @@ public class GameManager : MonoBehaviour
         musicSource.Play();
     }
 
-    public void NoteHit()
+    private void NoteHit()
     { 
+        hitSfx.Play();
         if (currentMultiplier - 1 < multiplierThreshold.Length)
         {
             multiplierTracker++;
@@ -92,6 +95,7 @@ public class GameManager : MonoBehaviour
 
     public void NoteMissed()
     {
+        errorSfx.Play();
         missedHitCount++;
         currentMultiplier = 1;
         multiplierTracker = 0;
@@ -120,7 +124,9 @@ public class GameManager : MonoBehaviour
 
     public void ApplyPenalty()
     {
+        errorSfx.Play();
         currentScore -= scoreForPenalty;
+        if (currentScore < 0) currentScore = 0;
         currentMultiplier = 1;
         multiplierTracker = 0;
     }

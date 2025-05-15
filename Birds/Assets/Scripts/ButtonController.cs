@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ButtonController : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class ButtonController : MonoBehaviour
     [Header("Effect Settings")]
     [SerializeField] private GameObject penaltyEffect;
     [SerializeField] private Vector3 effectRelativePosition;
+
+    [SerializeField] private AudioSource musicSource;
 
     public KeyCode keyToPress;
     private readonly List<NoteObject> _notesInRange = new();
@@ -33,6 +36,8 @@ public class ButtonController : MonoBehaviour
 
     private void HitFirstNoteInRange()
     {
+        if (SceneManager.GetActiveScene().name != "Level One") return;
+        
         if (_notesInRange.Count == 0)
         {
             Instantiate(penaltyEffect, transform.position + effectRelativePosition, penaltyEffect.transform.rotation);

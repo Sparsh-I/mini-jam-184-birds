@@ -7,7 +7,7 @@ public class ResultsManager : MonoBehaviour
 {
     [Header("Results Page")]
     [SerializeField] private GameObject resultsPane;
-    [SerializeField] private TextMeshProUGUI normalHitCountText, goodHitCountText, perfectHitCountText, missedHitCountText;
+    [SerializeField] private TextMeshProUGUI mehHitCountText, goodHitCountText, perfectHitCountText, missedHitCountText;
 
     [Header("References")] 
     [SerializeField] private GameManager gameManager;
@@ -21,7 +21,7 @@ public class ResultsManager : MonoBehaviour
     {
         resultsPane.gameObject.SetActive(true);
         
-        normalHitCountText.text = "Normal\n" + gameManager.mehHitCount;
+        mehHitCountText.text = "Meh\n" + gameManager.mehHitCount;
         goodHitCountText.text = "Good\n" + gameManager.goodHitCount;
         perfectHitCountText.text = "Perfect\n" + gameManager.perfectHitCount;
         missedHitCountText.text = "Missed\n" + gameManager.missedHitCount;
