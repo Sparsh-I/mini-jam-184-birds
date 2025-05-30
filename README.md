@@ -60,4 +60,4 @@ Developed using Unity Game Engine.
 
 --- 
 
-Copyright (c) 2025 Sparsh Inanda
+© 2025 Sparsh Inanda
