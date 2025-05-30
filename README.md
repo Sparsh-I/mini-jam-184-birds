@@ -10,7 +10,6 @@ A birds themed rhythm game made for Mini Jam 184, with the theme of birds and a 
 5. [Installation](#installation)  
 6. [Development](#development)  
 7. [Credits](#credits)  
-8. [License](#license)
 
 ---
 
